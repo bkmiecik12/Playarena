@@ -1,3 +1,5 @@
+package com.example.bkmiecik.playarena;
+
 import android.os.SystemClock;
 import android.widget.Chronometer;
 
