@@ -9,22 +9,18 @@
             android:id="@+id/cardview"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_margin="4dp"
-            app:cardElevation="4dp">
+            android:layout_margin="2dp"
+            app:cardElevation="2dp">
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                <!---
-                <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.5"/>
-                -->
                 <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:text="12"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
                         android:id="@+id/tv_num"
                         android:gravity="center"
                         android:textAllCaps="true"
@@ -33,6 +29,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="2"
                         android:text="Bartłomiej Kmiecik"
+                        android:textSize="15sp"
                         android:id="@+id/tv_name"
                         android:gravity="center"
                         android:textAllCaps="true"
@@ -44,6 +41,7 @@
                         android:layout_weight="1"
                         android:backgroundTint="#ffff88"
                         android:src="@drawable/soccer"
+                        android:onClick="goal"
                         android:scaleType="centerCrop"/>
                 <ImageButton
                         android:layout_width="0dp"

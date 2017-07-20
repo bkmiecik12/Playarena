@@ -6,25 +6,23 @@ import android.widget.Chronometer;
 /**
  * Created by bkmiecik on 17.07.17.
  */
-public class MatchPlayer {
-    private Chronometer chronometer;
+public class MatchPlayer extends Player {
     private long totalTime;
+    private long timeIn, timeOut;
 
-    public MatchPlayer(){
-        chronometer.setBase(System.currentTimeMillis());
+    public MatchPlayer(String name, int number){
+        super(name, number);
+        totalTime = 0;
     }
 
     public void sub_in(){
-        chronometer.setBase(System.currentTimeMillis());
-        chronometer.start();
+        timeIn = System.currentTimeMillis();
     }
 
     public void sub_out(){
-        chronometer.stop();
-        totalTime+= System.currentTimeMillis()-chronometer.getBase();
+        totalTime+= System.currentTimeMillis()-timeIn;
     }
-
     public long getTime(){
-        return totalTime;
+        return totalTime/1000;
     }
 }

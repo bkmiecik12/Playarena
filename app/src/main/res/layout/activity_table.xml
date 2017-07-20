@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:design="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/activity_match"
+        android:background="@color/greyTint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="com.example.bkmiecik.playarena.TableActivity">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <android.support.v7.widget.CardView
+                android:id="@+id/cardview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="1dp">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <!---
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"/>
+                -->
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Poz."
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:id="@+id/tv_num"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:layout_height="match_parent"/>
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:padding="10dp"
+                        android:text="Zespół"
+                        android:textSize="10sp"
+                        android:id="@+id/tv_name"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:layout_height="match_parent"/>
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Mecze"
+                        android:textSize="10sp"
+                        android:id="@+id/tv_matches"
+                        android:backgroundTint="@color/greyTint"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:layout_height="match_parent"/>
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:text="Bilans"
+                        android:textSize="10sp"
+                        android:id="@+id/tv_goals"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:layout_height="match_parent"/>
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Pkt."
+                        android:backgroundTint="@color/greyTint"
+                        android:textSize="10sp"
+                        android:id="@+id/tv_points"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:layout_height="match_parent"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:scrollbars="vertical"
+                android:id="@+id/recycler2"/>
+    </LinearLayout>
+
+</LinearLayout>

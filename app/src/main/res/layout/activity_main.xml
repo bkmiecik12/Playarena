@@ -11,13 +11,14 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:orientation="vertical"
-        android:background="#fff"
+        android:background="@color/greyTint"
         tools:context="com.example.bkmiecik.playarena.MainActivity">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="10"
+            android:elevation="3dp"
             android:orientation="horizontal"
             android:layout_gravity="center">
         <ImageView
@@ -25,15 +26,18 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="5dp"
-                android:src="@drawable/logo_pa_foot"
-                android:layout_row="0"/>
+                android:tint="@color/greyTint"
+                android:tintMode="multiply"
+                android:src="@drawable/logo_pa_foot"/>
         <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:padding="6dp"
+                android:tint="@color/greyTint"
+                android:tintMode="multiply"
                 android:layout_weight="1"
                 android:src="@drawable/klosdipns"
-                />
+                android:id="@+id/teamLogo"/>
     </LinearLayout>
 
     <TextView
@@ -42,33 +46,44 @@
             android:text="Kłosdipns"
             android:layout_weight="4"
             android:padding="3dp"
+            android:elegantTextHeight="true"
+            android:textAllCaps="true"
+            android:fontFamily="sans-serif-smallcaps"
             android:textAlignment="center"
             android:textSize="30sp"/>
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="30">
+            android:layout_weight="20">
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:scrollbars="vertical"
                 android:orientation="vertical">
             <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Dzień meczowy"
                     android:textAlignment="center"
+                    android:backgroundTint="@color/colorAccent"
+                    android:textColor="@color/greyTint"
                     android:padding="3dp"
                     android:id="@+id/b_match"/>
             <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tabela"
+                    android:id="@+id/b_table"
+                    android:backgroundTint="@color/colorAccent"
+                    android:textColor="@color/greyTint"
                     android:textAlignment="center"
                     android:padding="3dp"/>
             <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Kadra | Statystyki"
+                    android:backgroundTint="@color/colorAccent"
+                    android:textColor="@color/greyTint"
                     android:textAlignment="center"
                     android:padding="3dp"/>
         </LinearLayout>

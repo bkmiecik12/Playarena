@@ -18,6 +18,8 @@ public class MatchActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MatchAdapter matchAdapter;
 
+    static MyTeam myTeam = MainActivity.myTeam;
+
     int homeScore, awayScore;
     String home, away;
 
@@ -76,7 +78,7 @@ public class MatchActivity extends AppCompatActivity {
         checkButtons();
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler1);
-        matchAdapter = new MatchAdapter(this);
+        matchAdapter = new MatchAdapter(this, myTeam.players);
         recyclerView.setAdapter(matchAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -100,6 +102,10 @@ public class MatchActivity extends AppCompatActivity {
             bAwayMinus.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.redButton)));
         }
         setScoreboard();
+    }
+
+    public void goal(View view){
+        bHomePlus.performClick();
     }
 
     private void setScoreboard() {

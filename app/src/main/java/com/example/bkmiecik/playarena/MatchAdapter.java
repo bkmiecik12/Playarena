@@ -8,27 +8,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 /**
  * Created by bkmiecik on 19.07.17.
  */
 public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MyViewHolder> {
 
+    private List<Player> players;
     Context context;
     String[] nazwiska = {"Bartłomiej Kmiecik","Jakub Krasucki", "Oliwier Salamon", "Jakub Dytkowski", "Karol Tomalski", "Bartosz Laufer", "Karol Kowalczyk"};
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView textView;
+        public TextView name, number;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.tv_name);
+            name = (TextView) itemView.findViewById(R.id.tv_name);
+            number = (TextView) itemView.findViewById(R.id.tv_num);
         }
     }
 
 
-    public MatchAdapter(Context context) {
+    public MatchAdapter(Context context, List list) {
         this.context = context;
+        players = list;
     }
 
     @Override
@@ -41,13 +46,14 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.textView.setText(nazwiska[position]);
+        holder.name.setText(players.get(position).getName());
+        holder.number.setText(String.valueOf(players.get(position).getNumber()));
     }
 
 
     @Override
     public int getItemCount() {
-        return nazwiska.length;
+        return players.size();
     }
 
 }

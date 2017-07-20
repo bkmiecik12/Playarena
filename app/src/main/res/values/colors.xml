@@ -2,9 +2,12 @@
 <resources>
     <color name="colorPrimary">#6E8F4A</color>
     <color name="colorPrimaryDark">#41611f</color>
-    <color name="colorAccent">#BE8D00</color>
+    <color name="colorAccent">#bE8e00</color>
     <color name="greenButton">#88ff88</color>
     <color name="redButton">#ff8888</color>
     <color name="yellowButton">#ffff88</color>
     <color name="greyButton">#b0b0b0</color>
+    <color name="greyTint">#f0f0f0</color>
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
 </resources>
