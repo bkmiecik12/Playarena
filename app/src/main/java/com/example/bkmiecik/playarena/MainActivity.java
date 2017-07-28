@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class MainActivity extends Activity {
 
     Button b_match, b_table;
     ImageView teamLogo;
-    public static MyTeam myTeam;
+    private MyTeam myTeam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,8 @@ public class MainActivity extends Activity {
         b_match.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MatchActivity.class);
+                Intent intent = new Intent(MainActivity.this, MatchSettingsActivity.class);
+                intent.putExtra("myTeam",myTeam);
                 startActivity(intent);
             }
         });
@@ -34,7 +36,7 @@ public class MainActivity extends Activity {
         b_table.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,TableActivity.class));
+                startActivity(new Intent(MainActivity.this,TableActivity.class).putExtra("myTeam",myTeam));
             }
         });
 
@@ -50,8 +52,7 @@ public class MainActivity extends Activity {
                     try  {
                         myTeam.players = dd.downloadPlayers();
                         myTeam.teams = dd.downloadTeams();
-                        myTeam.printPlayers();
-                        myTeam.printTeams();
+                        b_table.setEnabled(true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

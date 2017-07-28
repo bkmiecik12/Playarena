@@ -1,12 +1,15 @@
 package com.example.bkmiecik.playarena;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by bkmiecik on 20.07.17.
  */
-public class MyTeam {
+
+@SuppressWarnings("serial")
+public class MyTeam implements Serializable {
     private int teamId;
     private String name;
     private String logoUrl;
@@ -19,7 +22,6 @@ public class MyTeam {
         logoUrl="/uf/media/images_thumb/thumb_149932-0ac00115-4105-076f.jpg";
         name="Kłosdipns";
         seasonId=15032;
-
     }
 
     public int getTeamId() {

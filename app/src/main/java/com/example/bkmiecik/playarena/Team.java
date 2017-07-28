@@ -1,9 +1,11 @@
 package com.example.bkmiecik.playarena;
 
+import java.io.Serializable;
+
 /**
  * Created by bkmiecik on 20.07.17.
  */
-public class Team {
+public class Team implements Serializable{
     private String position, teamName, matches, goals, points, wins, draws, loses;
 
     public Team(String position, String teamName, String matches, String goals, String points, String wins, String draws, String loses) {

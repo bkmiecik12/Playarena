@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".TableActivity">
         </activity>
+        <activity android:name=".MatchSettingsActivity">
+        </activity>
     </application>
 
 </manifest>

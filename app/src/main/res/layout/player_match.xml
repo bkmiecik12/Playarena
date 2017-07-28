@@ -42,17 +42,20 @@
                         android:backgroundTint="#ffff88"
                         android:src="@drawable/soccer"
                         android:onClick="goal"
+                        android:id="@+id/b_goal"
                         android:scaleType="centerCrop"/>
                 <ImageButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:id="@+id/b_sub_in"
                         android:backgroundTint="#88ff88"
                         android:src="@drawable/ic_arrow_upward_black_24dp"/>
                 <ImageButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:id="@+id/b_sub_out"
                         android:backgroundTint="#ff8888"
                         android:src="@drawable/ic_arrow_downward_black_24dp"/>
             </LinearLayout>

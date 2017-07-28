@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TableActivity extends AppCompatActivity {
 
-    MyTeam myTeam = MainActivity.myTeam;
+    MyTeam myTeam;
     List<Team> teams = new ArrayList<>();
     RecyclerView recyclerView;
 
@@ -19,6 +19,7 @@ public class TableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
 
+        myTeam = (MyTeam) getIntent().getSerializableExtra("myTeam");
         teams = myTeam.teams;
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler2);

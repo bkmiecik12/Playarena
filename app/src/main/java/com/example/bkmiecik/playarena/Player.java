@@ -2,10 +2,12 @@ package com.example.bkmiecik.playarena;
 
 import android.widget.Chronometer;
 
+import java.io.Serializable;
+
 /**
  * Created by bkmiecik on 17.07.17.
  */
-public class Player {
+public class Player implements Serializable{
     private String name;
     private int number;
     private long timePlayed;
