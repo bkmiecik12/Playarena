@@ -29,26 +29,31 @@
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="3">
+                        android:layout_weight="5">
 
                     <Chronometer
                             android:layout_width="0dp"
                             android:layout_weight="1.5"
+                            android:id="@+id/c_timer"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:gravity="center_horizontal"/>
+                            android:gravity="center"/>
 
                     <TextView
                             android:layout_width="0dp"
-                            android:layout_weight="2"
+                            android:layout_weight="3"
                             android:text="Kłosdipns"
+                            android:textSize="15sp"
                             android:gravity="center"
                             android:textAllCaps="true"
                             android:layout_height="match_parent"/>
 
                     <TextView
                             android:layout_width="0dp"
-                            android:layout_weight="2"
+                            android:layout_weight="1.5"
                             android:textSize="20sp"
                             android:id="@+id/scoreboard"
                             android:textStyle="bold"
@@ -57,8 +62,9 @@
 
                     <TextView
                             android:layout_width="0dp"
-                            android:layout_weight="2"
+                            android:layout_weight="3"
                             android:id="@+id/tv_away"
+                            android:textSize="15sp"
                             android:gravity="center"
                             android:textAllCaps="true"
                             android:layout_height="match_parent"/>
@@ -71,6 +77,7 @@
 
                     <ImageButton
                             android:layout_width="0dp"
+                            android:id="@+id/b_clock"
                             android:layout_height="match_parent"
                             android:layout_weight="1.5"
                             android:backgroundTint="#ffff88"
@@ -81,36 +88,41 @@
                     <ImageButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="1.5"
                             android:id="@+id/b_home_plus"
                             android:backgroundTint="#88ff88"
+                            android:scaleType="fitCenter"
                             android:src="@android:drawable/ic_input_add"/>
                     <ImageButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="1.5"
+                            android:scaleType="fitCenter"
                             android:id="@+id/b_home_minus"
                             android:backgroundTint="#ff8888"
                             android:src="@android:drawable/ic_delete"/>
                     <TextView
                             android:layout_width="0dp"
                             android:id="@+id/tv_on_pitch"
+                            android:gravity="center"
                             android:layout_height="match_parent"
-                            android:layout_weight="2"/>
+                            android:layout_weight="1.5"/>
                     <ImageButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="1.5"
+                            android:scaleType="fitCenter"
                             android:id="@+id/b_away_plus"
                             android:backgroundTint="#88ff88"
                             android:src="@android:drawable/ic_input_add"/>
                     <ImageButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="1.5"
+                            android:scaleType="fitCenter"
                             android:id="@+id/b_away_minus"
                             android:layout_gravity="right"
-                            android:backgroundTint="#ff8888"
+                            android:backgroundTint="@color/redButton"
                             android:src="@android:drawable/ic_delete"/>
 
                 </LinearLayout>
@@ -123,5 +135,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
         </android.support.v7.widget.RecyclerView>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="Koniec meczu"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:id="@+id/finish_match"/>
 
 </LinearLayout>

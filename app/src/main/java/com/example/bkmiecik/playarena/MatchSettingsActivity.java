@@ -105,6 +105,7 @@ public class MatchSettingsActivity extends AppCompatActivity {
                 match.setOnPitch(0);
 
                 startActivity(new Intent(MatchSettingsActivity.this,MatchActivity.class).putExtra("match",match));
+                finish();
             }
         });
     }

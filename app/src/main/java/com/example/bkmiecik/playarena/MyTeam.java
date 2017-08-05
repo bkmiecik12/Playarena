@@ -21,7 +21,7 @@ public class MyTeam implements Serializable {
         teamId=54134;
         logoUrl="/uf/media/images_thumb/thumb_149932-0ac00115-4105-076f.jpg";
         name="Kłosdipns";
-        seasonId=15032;
+        seasonId=15680;
     }
 
     public int getTeamId() {

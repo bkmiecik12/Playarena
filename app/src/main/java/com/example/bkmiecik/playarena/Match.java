@@ -10,12 +10,16 @@ import java.util.List;
 public class Match implements Serializable {
     private String home,away;
     private List<MatchPlayer> players;
+    private List<Event> events;
     private int homeScore, awayScore, inTeam, onPitch;
 
     private long timeHalf;
+    private int half;
+    private long elapsedTime;
 
     public Match() {
         players = new ArrayList<>();
+        events = new ArrayList<>();
     }
 
     public String getHome() {
@@ -84,7 +88,7 @@ public class Match implements Serializable {
     }
 
     public void setTimeHalf(long timeHalf) {
-        this.timeHalf = timeHalf*60000;
+        this.timeHalf = timeHalf*60;
     }
 
     public int getInTeam() {
@@ -101,5 +105,37 @@ public class Match implements Serializable {
 
     public void setOnPitch(int onPitch) {
         this.onPitch = onPitch;
+    }
+
+    public void timeUp() {
+        elapsedTime++;
+        for(MatchPlayer p : players)
+            if(p.isPlaying) p.playing();
+    }
+
+    public long getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(long elapsedTime) {
+        this.elapsedTime = elapsedTime;
+    }
+
+    public void addEvent(Event e){
+        events.add(e);
+    }
+
+    public void removeEvent(Event.Team team) {
+        for(int i=events.size()-1;i>=0;i--)
+            if(events.get(i).getEventType() == Event.EventType.GOAL && events.get(i).getTeam()==team){
+                if(events.get(i).getPlayerKnown()== Event.PlayerKnown.KNOWN)
+                    players.get(events.get(i).getPosition()).minusGoal();
+                events.remove(i);
+                return;
+            }
+    }
+
+    public List<Event> getEvents() {
+        return events;
     }
 }

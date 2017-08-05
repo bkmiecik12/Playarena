@@ -12,27 +12,54 @@ import java.io.Serializable;
 
 public class MatchPlayer extends Player implements Serializable {
     private long totalTime;
-    private long timeIn, timeOut;
+    boolean isPlaying;
     private int currentGoals;
+    private int currentAssists;
 
     public MatchPlayer(String name, int number){
         super(name, number);
         totalTime = 0;
+        isPlaying = false;
         currentGoals=0;
+        currentAssists=0;
     }
 
     public void sub_in(){
-        timeIn = System.currentTimeMillis();
+        isPlaying = true;
     }
 
     public void sub_out(){
-        totalTime+= System.currentTimeMillis()-timeIn;
+        isPlaying = false;
     }
-    public long getTime(){
-        return totalTime/1000;
+    public String getTime(){
+        return String.format("%02d:%02d",totalTime/60,totalTime%60);
+//        return LocalTime.MIN.plusSeconds(nSecondTime).toString();
+    }
+    public long getLongTime(){
+        return totalTime;
+    }
+
+    public void playing(){
+        totalTime++;
     }
 
     public void goal() {
         currentGoals++;
+    }
+
+    public int getCurrentGoals() {
+        return currentGoals;
+    }
+
+    public void minusGoal() {
+        currentGoals--;
+    }
+
+    public void assist() {
+        currentAssists++;
+    }
+
+    public int getCurrentAssists() {
+        return currentAssists;
     }
 }
