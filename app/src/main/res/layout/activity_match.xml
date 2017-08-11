@@ -12,7 +12,7 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context="com.example.bkmiecik.playarena.MatchActivity">
+        tools:context="com.example.bkmiecik.playarena.Activities.MatchActivity">
         <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -45,7 +45,7 @@
                     <TextView
                             android:layout_width="0dp"
                             android:layout_weight="3"
-                            android:text="Kłosdipns"
+                            android:id="@+id/tv_home"
                             android:textSize="15sp"
                             android:gravity="center"
                             android:textAllCaps="true"

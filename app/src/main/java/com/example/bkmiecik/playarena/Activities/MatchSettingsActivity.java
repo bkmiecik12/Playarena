@@ -1,13 +1,20 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Activities;
 
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.*;
+import com.example.bkmiecik.playarena.*;
+import com.example.bkmiecik.playarena.Models.*;
+import com.example.bkmiecik.playarena.Network.BackgroundWorker;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MatchSettingsActivity extends AppCompatActivity {
@@ -30,11 +37,11 @@ public class MatchSettingsActivity extends AppCompatActivity {
         myTeam = (MyTeam) getIntent().getSerializableExtra("myTeam");
 
         players = new ArrayList<>();
-        for(Player p : myTeam.players)
+        for(Player p : myTeam.getPlayers())
             players.add(p.getNumber()+". "+p.getName());
 
         teams = new ArrayList<>();
-        for(Team t : myTeam.teams)
+        for(Team t : myTeam.getTeams())
             if(!t.getTeamName().equals(myTeam.getName())) teams.add(t.getTeamName());
 
         lvPlayers = (ListView) findViewById(R.id.lv_squad);
@@ -103,6 +110,17 @@ public class MatchSettingsActivity extends AppCompatActivity {
                 match.setInTeam(sbCountPlayers.getProgress()+4);
                 match.setTimeHalf(sbHalf.getProgress());
                 match.setOnPitch(0);
+                match.setId("1");
+
+                Calendar c = Calendar.getInstance();
+                //System.out.println("Current time => " + c.getTime());
+
+                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+                String formattedDate = df.format(c.getTime());
+
+
+                BackgroundWorker backgroundWorker = new BackgroundWorker(MatchSettingsActivity.this);
+                backgroundWorker.execute("match","1",match.getHome(),match.getAway(), formattedDate,"0:0");
 
                 startActivity(new Intent(MatchSettingsActivity.this,MatchActivity.class).putExtra("match",match));
                 finish();
@@ -113,7 +131,7 @@ public class MatchSettingsActivity extends AppCompatActivity {
         SparseBooleanArray array = lvPlayers.getCheckedItemPositions();
         List<MatchPlayer> players = new ArrayList<>();
         for(int i=0;i<array.size();i++)
-            if(array.valueAt(i)) players.add(new MatchPlayer(myTeam.players.get(array.keyAt(i)).getName(),myTeam.players.get(array.keyAt(i)).getNumber()));
+            if(array.valueAt(i)) players.add(new MatchPlayer(myTeam.getPlayers().get(array.keyAt(i)).getName(),myTeam.getPlayers().get(array.keyAt(i)).getNumber()));
         return players;
     }
 }

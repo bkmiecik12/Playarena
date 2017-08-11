@@ -1,4 +1,4 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.example.bkmiecik.playarena.R;
+import com.example.bkmiecik.playarena.Models.Team;
 
 import java.util.List;
 

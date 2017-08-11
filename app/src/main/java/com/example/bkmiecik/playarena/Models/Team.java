@@ -1,4 +1,4 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Models;
 
 import java.io.Serializable;
 

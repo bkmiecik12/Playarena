@@ -1,4 +1,4 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.example.bkmiecik.playarena.Activities.AfterMatchActivity;
+import com.example.bkmiecik.playarena.Activities.MainActivity;
+import com.example.bkmiecik.playarena.Models.Match;
+import com.example.bkmiecik.playarena.R;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -1,16 +1,16 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Activities;
 
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import com.example.bkmiecik.playarena.*;
+import com.example.bkmiecik.playarena.Fragments.GoalsFragment;
+import com.example.bkmiecik.playarena.Fragments.PlayersFragment;
+import com.example.bkmiecik.playarena.Models.Event;
+import com.example.bkmiecik.playarena.Models.Match;
 
 import java.io.Serializable;
 import java.util.ArrayList;

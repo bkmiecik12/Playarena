@@ -1,4 +1,4 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Models;
 
 import java.io.Serializable;
 
@@ -8,8 +8,8 @@ import java.io.Serializable;
 
 public class Event implements Serializable {
 
-    protected enum EventType implements Serializable {GOAL,SUBIN,SUBOUT,ASSIST}
-    protected enum PlayerKnown implements Serializable {KNOWN,UNKNOWN}
+    public enum EventType implements Serializable {GOAL,SUBIN,SUBOUT,ASSIST}
+    public enum PlayerKnown implements Serializable {KNOWN,UNKNOWN}
     public enum Team implements Serializable {HOME,AWAY}
 
 

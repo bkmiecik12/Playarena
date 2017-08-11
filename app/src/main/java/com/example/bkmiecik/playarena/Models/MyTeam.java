@@ -1,4 +1,4 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,6 +22,13 @@ public class MyTeam implements Serializable {
         logoUrl="/uf/media/images_thumb/thumb_149932-0ac00115-4105-076f.jpg";
         name="Kłosdipns";
         seasonId=15680;
+    }
+
+    public MyTeam(int teamId, String name, String logoUrl, int seasonId) {
+        this.teamId = teamId;
+        this.name = name;
+        this.logoUrl = logoUrl;
+        this.seasonId = seasonId;
     }
 
     public int getTeamId() {
@@ -57,6 +64,7 @@ public class MyTeam implements Serializable {
     }
 
     public void printPlayers(){
+        System.out.println(players.size());
         for(Player p : players){
             System.out.println(p.getNumber()+". "+p.getName());
         }
@@ -64,7 +72,23 @@ public class MyTeam implements Serializable {
 
     public void printTeams(){
         for(Team t : teams){
-            System.out.println(t.getPosition()+". "+t.getTeamName());
+            System.out.println(t.getPosition()+" "+t.getTeamName());
         }
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 }

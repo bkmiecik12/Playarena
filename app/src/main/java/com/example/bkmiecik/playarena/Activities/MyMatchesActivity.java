@@ -1,9 +1,12 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import com.example.bkmiecik.playarena.Models.Match;
+import com.example.bkmiecik.playarena.Adapters.MyMatchesAdapter;
+import com.example.bkmiecik.playarena.R;
 
 import java.util.ArrayList;
 import java.util.List;

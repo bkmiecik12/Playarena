@@ -1,9 +1,13 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import com.example.bkmiecik.playarena.Models.MyTeam;
+import com.example.bkmiecik.playarena.R;
+import com.example.bkmiecik.playarena.Adapters.TableAdapter;
+import com.example.bkmiecik.playarena.Models.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +24,7 @@ public class TableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_table);
 
         myTeam = (MyTeam) getIntent().getSerializableExtra("myTeam");
-        teams = myTeam.teams;
+        teams = myTeam.getTeams();
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler2);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

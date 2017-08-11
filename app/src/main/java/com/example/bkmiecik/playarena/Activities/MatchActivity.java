@@ -1,52 +1,56 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.android.volley.*;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.bkmiecik.playarena.*;
+import com.example.bkmiecik.playarena.Models.Event;
+import com.example.bkmiecik.playarena.Models.Match;
+import com.example.bkmiecik.playarena.Models.MatchPlayer;
+import com.example.bkmiecik.playarena.Models.MyTeam;
+import com.example.bkmiecik.playarena.Network.BackgroundWorker;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MatchActivity extends AppCompatActivity {
 
     MatchAdapter matchAdapter;
 
     MyTeam myTeam;
-    Match match;
+    Match match, m;
 
     ImageButton bClock,bHomePlus,bHomeMinus,bAwayPlus,bAwayMinus;
     Button finish;
-    TextView tvScoreboard, tvAway, tvOnPitch;
+    TextView tvScoreboard, tvAway, tvHome, tvOnPitch;
     RecyclerView rvPlayers;
     boolean isRunning;
     private long mLastStopTime=0;
+
+    RequestQueue requestQueue;
 
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
+
+        //requestQueue = Volley.newRequestQueue(this);
 
         match = (Match) getIntent().getSerializableExtra("match");
         match.setElapsedTime(0);
@@ -63,6 +67,60 @@ public class MatchActivity extends AppCompatActivity {
         bClock = (ImageButton) findViewById(R.id.b_clock);
         finish = (Button) findViewById(R.id.finish_match);
 
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.myMatches.add(match);
+                try {
+                    writeMatches();
+                    Log.d("Zapisanych: ", String.valueOf(MainActivity.myMatches.size()));
+                    //Toast.makeText(MatchActivity.this,"Zapisanych: "+MainActivity.myMatches.size(),Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                for(final Event e : match.getEvents()) {
+                    if (e.getEventType() == Event.EventType.GOAL){
+                        String url = "http://playarena.kmiecik.tk/goal.php";
+                        requestQueue  = Volley.newRequestQueue(v.getContext());
+                        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.d("response",response);
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("onErrorResponse: ","dupa");
+                            }
+                        }){
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String,String> params = new HashMap<>();
+
+                                params.put("matchId",match.getId());
+
+                                params.put("player",
+                                        e.getPlayerKnown() == Event.PlayerKnown.KNOWN ?
+                                                match.getPlayers().get(e.getPosition()).getName() :
+                                                e.getTeam()== Event.Team.HOME ?
+                                                        "["+match.getHome()+"]" :
+                                                        "["+match.getAway()+"]");
+                                params.put("time",e.getTime());
+
+                                params.put("team",e.getTeam() == Event.Team.HOME ? "home" : "away");
+
+                                return params;
+                            }
+                        };
+                        requestQueue.add(request);
+                    }
+                }
+                startActivity(new Intent(MatchActivity.this,AfterMatchActivity.class).putExtra("match",match));
+                finish();
+            }
+        });
+
         final Chronometer timer = (Chronometer) findViewById(R.id.c_timer);
 
 
@@ -73,6 +131,7 @@ public class MatchActivity extends AppCompatActivity {
 
         tvScoreboard = (TextView) findViewById(R.id.scoreboard);
         tvAway = (TextView) findViewById(R.id.tv_away);
+        tvHome = (TextView) findViewById(R.id.tv_home);
         tvOnPitch = (TextView) findViewById(R.id.tv_on_pitch);
 
         tvAway.setText(match.getAway());
@@ -129,21 +188,6 @@ public class MatchActivity extends AppCompatActivity {
                     bClock.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.greyButton)));
 
                     finish.setVisibility(View.VISIBLE);
-                    finish.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            MainActivity.myMatches.add(match);
-                            try {
-                                writeMatches();
-                                Log.d("Zapisanych: ", String.valueOf(MainActivity.myMatches.size()));
-                                //Toast.makeText(MatchActivity.this,"Zapisanych: "+MainActivity.myMatches.size(),Toast.LENGTH_SHORT).show();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            startActivity(new Intent(MatchActivity.this,AfterMatchActivity.class).putExtra("match",match));
-                            finish();
-                        }
-                    });
 
                 }
                 else timer.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -218,8 +262,18 @@ public class MatchActivity extends AppCompatActivity {
     }
 
     private void setScoreboard() {
-        tvScoreboard.setText(new StringBuilder().append(match.getHomeScore()).append(":").append(match.getAwayScore()).toString());
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(match.getHomeScore()).append(":").append(match.getAwayScore());
+
+        BackgroundWorker bw = new BackgroundWorker(this);
+        bw.execute("update",match.getId(),sb.toString());
+
+        tvScoreboard.setText(sb.toString());
         tvAway.setText(match.getAway());
+        tvHome.setText(match.getHome());
+
+
     }
 
     private void writeMatches() throws IOException {
@@ -267,6 +321,7 @@ public class MatchActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         int position = getAdapterPosition();
+
                         match.getPlayers().get(position).goal();
                         match.homeGoal();
                         match.addEvent(new Event(position,match.getElapsedTime(), Event.EventType.GOAL, Event.PlayerKnown.KNOWN, Event.Team.HOME));
@@ -316,7 +371,7 @@ public class MatchActivity extends AppCompatActivity {
                         goal.setVisibility(View.GONE);
                         assist.setVisibility(View.INVISIBLE);
                         subIn.setVisibility(View.VISIBLE);
-                        stats.setText(match.getPlayers().get(position).getCurrentGoals()+" | "+match.getPlayers().get(position).getAssists()+"\n"+match.getPlayers().get(position).getTime());
+                        stats.setText(match.getPlayers().get(position).getCurrentGoals()+" | "+match.getPlayers().get(position).getCurrentAssists()+"\n"+match.getPlayers().get(position).getTime());
                         stats.setVisibility(View.VISIBLE);
                         checkPitch();
                 }

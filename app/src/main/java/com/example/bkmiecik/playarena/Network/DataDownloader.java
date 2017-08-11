@@ -1,6 +1,8 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Network;
 
 import android.util.Log;
+import com.example.bkmiecik.playarena.Models.Player;
+import com.example.bkmiecik.playarena.Models.Team;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -8,7 +10,6 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 
@@ -37,16 +38,20 @@ public class DataDownloader {
         final Document document = Jsoup.connect(baseUrl).get();
 
         for(Element row : document.select("tr")){
-            String number = row.select("td.font30.font800").text();
-            String name = row.select("a.c_default").text();
             List<String> data = row.select("td").eachText();
             for(int i=0; i<data.size();i++)
-                System.out.print(data.get(i)+" ");
-            if(number!="") {
-                players.add(new Player(name,Integer.valueOf(number),Integer.valueOf(data.get(3)),Integer.valueOf(data.get(4)),Integer.valueOf(data.get(5)),Integer.valueOf(data.get(6))));
+                System.out.print(i+" "+data.get(i)+"\n");
+            if(data.size()>0) {
+                players.add(new Player(data.get(1),
+                        Integer.valueOf(data.get(0)),
+                        Integer.valueOf(data.get(3)),
+                        Integer.valueOf(data.get(4)),
+                        Integer.valueOf(data.get(5)),
+                        Integer.valueOf(data.get(6))));
             }
+            //System.out.print(data.size()+"\n");
         }
-
+        System.out.println("PSIZE: "+players.size());
         return players;
     }
 
@@ -61,7 +66,7 @@ public class DataDownloader {
             String line = row.select("td").text();
             //System.out.println(position);
             String[] splitted = line.split(Pattern.quote(" "));
-            if(splitted.length>1){
+            if(splitted.length>=12 && splitted[0].length()<=3){
                 String pos = splitted[0];
                 String points = splitted[splitted.length-1];
                 String goalsConceded = splitted[splitted.length-2];

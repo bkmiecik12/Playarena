@@ -1,4 +1,4 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.List;
  * Created by bkmiecik on 27.07.17.
  */
 public class Match implements Serializable {
-    private String home,away;
+    private String home,away,id;
     private List<MatchPlayer> players;
     private List<Event> events;
     private int homeScore, awayScore, inTeam, onPitch;
@@ -137,5 +137,13 @@ public class Match implements Serializable {
 
     public List<Event> getEvents() {
         return events;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

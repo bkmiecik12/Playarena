@@ -1,4 +1,4 @@
-package com.example.bkmiecik.playarena;
+package com.example.bkmiecik.playarena.Adapters;
 
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.example.bkmiecik.playarena.Models.MyTeam;
+import com.example.bkmiecik.playarena.Models.Player;
+import com.example.bkmiecik.playarena.R;
 
 /**
  * Created by bkmiecik on 05.08.17.
@@ -30,18 +33,18 @@ public class TeamStatsAdapter extends RecyclerView.Adapter<TeamStatsAdapter.MyVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.matches.setText(String.valueOf(myTeam.players.get(position).getSeasonMatches()));
+        holder.matches.setText(String.valueOf(myTeam.getPlayers().get(position).getSeasonMatches()));
         holder.matches.setVisibility(View.VISIBLE);
-        holder.number.setText(String.valueOf(myTeam.players.get(position).getNumber()));
-        holder.name.setText(myTeam.players.get(position).getName());
-        holder.goals.setText(String.valueOf(myTeam.players.get(position).getSeasonGoals()));
-        holder.assists.setText(String.valueOf(myTeam.players.get(position).getAssists()));
-        holder.time.setText(String.valueOf(myTeam.players.get(position).getStringTime()));
+        holder.number.setText(String.valueOf(myTeam.getPlayers().get(position).getNumber()));
+        holder.name.setText(myTeam.getPlayers().get(position).getName());
+        holder.goals.setText(String.valueOf(myTeam.getPlayers().get(position).getSeasonGoals()));
+        holder.assists.setText(String.valueOf(myTeam.getPlayers().get(position).getAssists()));
+        holder.time.setText(String.valueOf(myTeam.getPlayers().get(position).getStringTime()));
     }
 
     @Override
     public int getItemCount() {
-        return myTeam.players.size();
+        return myTeam.getPlayers().size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -62,7 +65,7 @@ public class TeamStatsAdapter extends RecyclerView.Adapter<TeamStatsAdapter.MyVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Player p = myTeam.players.get(getPosition());
+                    Player p = myTeam.getPlayers().get(getPosition());
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(context)
                             .setTitle(p.getNumber()+" "+p.getName())

@@ -11,7 +11,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".MainActivity"
+                android:name=".Activities.MainActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -20,26 +20,28 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".MatchActivity"
+                android:name=".Activities.MatchActivity"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".TableActivity"
+                android:name=".Activities.TableActivity"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".MatchSettingsActivity"
+                android:name=".Activities.MatchSettingsActivity"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".AfterMatchActivity"
+                android:name=".Activities.AfterMatchActivity"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".MyMatchesActivity"
+                android:name=".Activities.MyMatchesActivity"
                 android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".TeamStatsActivity">
+        <activity android:name=".Activities.TeamStatsActivity">
+        </activity>
+        <activity android:name=".Activities.SetTeamActivity">
         </activity>
     </application>
 
